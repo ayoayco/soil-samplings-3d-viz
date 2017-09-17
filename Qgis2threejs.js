@@ -623,6 +623,7 @@ limitations:
                         for (var i=0; i<data.length; i++) {
                             if(data[i].Site === sample) {
                                 d = data[i];
+                                console.log(d);
                                 var k = depth.substring(depth.length-1);
                                 var display = d['depth_' + k];
                                 console.log(display);
@@ -630,6 +631,7 @@ limitations:
                                 // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
 
                                 t.push('<table class="soilchar-table coords">');
+                                t.push("<tr><td colspan='2'><strong>Status: </strong>"+d.foc_status+"</td></tr>");
                                 t.push("<tr><td class='char-label'>class</td><td>"+display.class+"</td></tr>");
                                 t.push("<tr><td class='char-label'>sand</td><td>"+display.sand+"</td></tr>");
                                 t.push("<tr><td class='char-label'>silt</td><td>"+display.silt+"</td></tr>");
@@ -641,7 +643,7 @@ limitations:
                                 t.push("<tr><td class='char-label'>Na</td><td>"+display.Na__m_eq_1+"</td></tr>");
                                 t.push("<tr><td class='char-label'>K</td><td>"+display.K__m_eq_10+"</td></tr>");
                                 t.push("</table>");
-                                t.push("<p>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>")
+                                t.push("<p style='width: 200px'>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>")
                                 app.popup.show(t.join(""));
                            }
                         }
