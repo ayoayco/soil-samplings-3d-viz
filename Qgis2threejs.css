@@ -35,7 +35,7 @@ body {
   position: absolute;
   left: 2px;
   top: 2px;
-  max-width: 480px;
+  max-width: 380px;
   min-width: 300px;
   z-index: 9999;
   border: solid gray;
@@ -217,4 +217,8 @@ table.attrs tr td:first-child {
 
 td.char-label {
   width: 100px;
+}
+
+table#soilchar-table {
+  width: 300px;
 }
