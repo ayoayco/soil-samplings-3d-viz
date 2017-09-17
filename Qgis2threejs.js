@@ -602,9 +602,57 @@ limitations:
         var layerinfo = layer.name.split("_");
         var sample = layerinfo[1];
         var depth = layerinfo[0];
-        t.push("<tr><td><strong>Sample: </strong>" + sample + "</td></tr>");
+        t.push("<tr><td><strong>Site: </strong>" + sample + "</td></tr>");
         t.push("<tr><td><strong>Depth: </strong>" + depth + "</td></tr>");
         t.push("</table>");
+
+            var xmlhttp = new XMLHttpRequest();
+            var d = {};
+            var data = {};
+            var url = 'http://d3rjwxvgw19cvv.cloudfront.net/san_jose_soilchar.json';
+
+            xmlhttp.open('GET', url, true);
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4) {
+                    if(xmlhttp.status == 200) {
+                        data = JSON.parse(xmlhttp.responseText);
+                        data = data.data;
+                        console.log(data);
+                        data = data.soil_data;
+                        // get data index
+                        for (var i=0; i<data.length; i++) {
+                            if(data[i].Site === sample) {
+                                d = data[i];
+                                var k = depth.substring(depth.length-1);
+                                var display = d['depth_' + k];
+                                console.log(display);
+
+                                // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
+
+                                t.push('<table class="soilchar-table coords">');
+                                t.push("<tr><td class='char-label'>class</td><td>"+display.class+"</td></tr>");
+                                t.push("<tr><td class='char-label'>sand</td><td>"+display.sand+"</td></tr>");
+                                t.push("<tr><td class='char-label'>silt</td><td>"+display.silt+"</td></tr>");
+                                t.push("<tr><td class='char-label'>clay</td><td>"+display.clay+"</td></tr>");
+                                t.push("<tr><td class='char-label'>pH</td><td>"+display.pH+"</td></tr>");
+                                t.push("<tr><td class='char-label'>Phosphorus</td><td>"+display.Phosphorus+"</td></tr>");
+                                t.push("<tr><td class='char-label'>Ca</td><td>"+display.Ca__m_eq_1+"</td></tr>");
+                                t.push("<tr><td class='char-label'>Mg</td><td>"+display.Mg__m_eq_1+"</td></tr>");
+                                t.push("<tr><td class='char-label'>Na</td><td>"+display.Na__m_eq_1+"</td></tr>");
+                                t.push("<tr><td class='char-label'>K</td><td>"+display.K__m_eq_10+"</td></tr>");
+                                t.push("</table>");
+                                t.push("<p>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>")
+                                app.popup.show(t.join(""));
+                           }
+                        }
+
+                     }
+                }
+            };
+            xmlhttp.send(null);
+
+
+
 
 
 
@@ -618,7 +666,6 @@ limitations:
             }
             r.push("</table>");
         }
-        app.popup.show(t.join(""));
     };
 
     app.showPrintDialog = function() {
