@@ -597,17 +597,11 @@ limitations:
         r.push("</td></tr></table>");
 
         // soil characteristics
-        t.push('<table class="soilchar-table coords">');
-        t.push("<caption>Soil Characteristics</caption>");
         var layerinfo = layer.name.split("_");
         console.log(layerinfo);
         var farm_id = layerinfo[0]
         var depth = layerinfo[1];
         var site = layerinfo[2];
-        t.push("<tr><td><strong>Site: </strong>" + site + "</td></tr>");
-        t.push("<tr><td><strong>Depth: </strong>" + depth + "</td></tr>");
-        t.push("</table>");
-
             var xmlhttp = new XMLHttpRequest();
             var d = {};
             var data = {};
@@ -623,6 +617,12 @@ limitations:
                         console.log(data);
                         // get data index
                         // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
+                        t.push('<table class="soilchar-table coords">');
+                        t.push("<caption>Soil Characteristics</caption>");
+                        t.push("<tr><td><strong>Site: </strong>" + site + "</td></tr>");
+                        t.push("<tr><td><strong>Depth: </strong>" + data.depth_verbose + "</td></tr>");
+                        t.push("</table>");
+
                         t.push('<table class="soilchar-table coords">');
                         t.push("<tr><th>Parameter</th><th>Laboratory</th><th>Qualitative</th></tr>");
                         t.push("<tr><td>pH</td><td>"+data.pH+"</td><td>"+data.pH_quality+"</td></tr>");
