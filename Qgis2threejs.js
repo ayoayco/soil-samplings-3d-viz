@@ -600,16 +600,18 @@ limitations:
         t.push('<table class="soilchar-table coords">');
         t.push("<caption>Soil Characteristics</caption>");
         var layerinfo = layer.name.split("_");
-        var sample = layerinfo[1];
-        var depth = layerinfo[0];
-        t.push("<tr><td><strong>Site: </strong>" + sample + "</td></tr>");
+        console.log(layerinfo);
+        var farm_id = layerinfo[0]
+        var depth = layerinfo[1];
+        var site = layerinfo[2];
+        t.push("<tr><td><strong>Site: </strong>" + site + "</td></tr>");
         t.push("<tr><td><strong>Depth: </strong>" + depth + "</td></tr>");
         t.push("</table>");
 
             var xmlhttp = new XMLHttpRequest();
             var d = {};
             var data = {};
-            var url = 'http://d3rjwxvgw19cvv.cloudfront.net/san_jose_soilchar.json';
+            var url = 'http://apiv2.citas.ph/soil_char/'+farm_id;
 
             xmlhttp.open('GET', url, true);
             xmlhttp.onreadystatechange = function() {
@@ -617,37 +619,29 @@ limitations:
                     if(xmlhttp.status == 200) {
                         data = JSON.parse(xmlhttp.responseText);
                         data = data.data;
+                        data = data[site]["depth_"+depth];
                         console.log(data);
-                        data = data.soil_data;
                         // get data index
-                        for (var i=0; i<data.length; i++) {
-                            if(data[i].Site === sample) {
-                                d = data[i];
-                                console.log(d);
-                                var k = depth.substring(depth.length-1);
-                                var display = d['depth_' + k];
-                                console.log(display);
-
-                                // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
-
-                                t.push('<table class="soilchar-table coords">');
-                                t.push("<tr><td colspan='2'><strong>Status: </strong>"+d.foc_status+"</td></tr>");
-                                t.push("<tr><td class='char-label'>class</td><td>"+display.class+"</td></tr>");
-                                t.push("<tr><td class='char-label'>sand</td><td>"+display.sand+"</td></tr>");
-                                t.push("<tr><td class='char-label'>silt</td><td>"+display.silt+"</td></tr>");
-                                t.push("<tr><td class='char-label'>clay</td><td>"+display.clay+"</td></tr>");
-                                t.push("<tr><td class='char-label'>pH</td><td>"+display.pH+"</td></tr>");
-                                t.push("<tr><td class='char-label'>Phosphorus</td><td>"+display.Phosphorus+"</td></tr>");
-                                t.push("<tr><td class='char-label'>Ca</td><td>"+display.Ca__m_eq_1+"</td></tr>");
-                                t.push("<tr><td class='char-label'>Mg</td><td>"+display.Mg__m_eq_1+"</td></tr>");
-                                t.push("<tr><td class='char-label'>Na</td><td>"+display.Na__m_eq_1+"</td></tr>");
-                                t.push("<tr><td class='char-label'>K</td><td>"+display.K__m_eq_10+"</td></tr>");
-                                t.push("</table>");
-                                t.push("<p style='width: 200px'>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>")
-                                app.popup.show(t.join(""));
-                           }
-                        }
-
+                        // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
+                        t.push('<table class="soilchar-table coords">');
+                        t.push("<tr><th>Parameter</th><th>Laboratory</th><th>Qualitative</th></tr>")
+                        t.push("<tr><td>pH</td><td>"+data.pH+"</td><td>"+data.pH_quality+"</td></tr>")
+                        t.push("<tr><td>N (%)</td><td>"+data.N+"</td><td>"+data.N_quality+"</td></tr>")
+                        t.push("<tr><td>P (ppm)</td><td>"+data.P+"</td><td>"+data.P_quality+"</td></tr>")
+                        t.push("<tr><td>K (m. eq./100g Soil)</td><td>"+data.K+"</td><td>"+data.K_quality+"</td></tr>")
+                        t.push("<tr><td>Mg (m. eq./100g Soil)</td><td>"+data.Mg+"</td><td>"+data.Mg_quality+"</td></tr>")
+                        t.push("<tr><td>Ca (m. eq./100g Soil)</td><td>"+data.Ca+"</td><td>"+data.Ca_quality+"</td></tr>")
+                        t.push("<tr><td>Na (m. eq./100g Soil)</td><td>"+data.Na+"</td><td>"+data.Na_quality+"</td></tr>")
+                        t.push("<tr><td>B (ppm)</td><td>"+data.B+"</td><td>"+data.B_quality+"</td></tr>")
+                        t.push("<tr><td>CEC (MH&AC)</td><td>"+data.CEC+"</td><td>"+data.CEC_quality+"</td></tr>")
+                        t.push("<tr><td>OM (%)</td><td>"+data.OM+"</td><td>"+data.OM_quality+"</td></tr>")
+                        t.push("<tr><td>OC (%)</td><td>"+data.OC+"</td><td>"+data.OC_quality+"</td></tr>")
+                        t.push("<tr><td>P205 (%)</td><td>"+data.P205+"</td></tr>")
+                        t.push("<tr><td>MF</td><td>"+data.MF+"</td></tr>")
+                        t.push("<tr><td>Class</td><td>"+data.Class+"</td></tr>")
+                        t.push("</table>");
+                        t.push("<p style='width: 200px'>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>")
+                        app.popup.show(t.join(""));
                      }
                 }
             };
