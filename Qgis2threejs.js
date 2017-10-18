@@ -598,7 +598,7 @@ limitations:
 
         // soil characteristics
         var layerinfo = layer.name.split("_");
-        console.log(layerinfo);
+        // console.log(layerinfo);
         var farm_id = layerinfo[0]
         var depth = layerinfo[1];
         var site = layerinfo[2];
@@ -614,7 +614,7 @@ limitations:
                         data = JSON.parse(xmlhttp.responseText);
                         data = data.data;
                         data = data[site]["depth_"+depth];
-                        console.log(data);
+                        // console.log(data);
                         // get data index
                         // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
                         t.push('<table class="soilchar-table coords">');
