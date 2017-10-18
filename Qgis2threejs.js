@@ -624,23 +624,23 @@ limitations:
                         // get data index
                         // show columns: class, sand, silt, clay, pH, Phosphorus, Ca, Mg, Na, K
                         t.push('<table class="soilchar-table coords">');
-                        t.push("<tr><th>Parameter</th><th>Laboratory</th><th>Qualitative</th></tr>")
-                        t.push("<tr><td>pH</td><td>"+data.pH+"</td><td>"+data.pH_quality+"</td></tr>")
-                        t.push("<tr><td>N (%)</td><td>"+data.N+"</td><td>"+data.N_quality+"</td></tr>")
-                        t.push("<tr><td>P (ppm)</td><td>"+data.P+"</td><td>"+data.P_quality+"</td></tr>")
-                        t.push("<tr><td>K (m. eq./100g Soil)</td><td>"+data.K+"</td><td>"+data.K_quality+"</td></tr>")
-                        t.push("<tr><td>Mg (m. eq./100g Soil)</td><td>"+data.Mg+"</td><td>"+data.Mg_quality+"</td></tr>")
-                        t.push("<tr><td>Ca (m. eq./100g Soil)</td><td>"+data.Ca+"</td><td>"+data.Ca_quality+"</td></tr>")
-                        t.push("<tr><td>Na (m. eq./100g Soil)</td><td>"+data.Na+"</td><td>"+data.Na_quality+"</td></tr>")
-                        t.push("<tr><td>B (ppm)</td><td>"+data.B+"</td><td>"+data.B_quality+"</td></tr>")
-                        t.push("<tr><td>CEC (MH&AC)</td><td>"+data.CEC+"</td><td>"+data.CEC_quality+"</td></tr>")
-                        t.push("<tr><td>OM (%)</td><td>"+data.OM+"</td><td>"+data.OM_quality+"</td></tr>")
-                        t.push("<tr><td>OC (%)</td><td>"+data.OC+"</td><td>"+data.OC_quality+"</td></tr>")
-                        t.push("<tr><td>P205 (%)</td><td>"+data.P205+"</td></tr>")
-                        t.push("<tr><td>MF</td><td>"+data.MF+"</td></tr>")
-                        t.push("<tr><td>Class</td><td>"+data.Class+"</td></tr>")
+                        t.push("<tr><th>Parameter</th><th>Laboratory</th><th>Qualitative</th></tr>");
+                        t.push("<tr><td>pH</td><td>"+data.pH+"</td><td>"+data.pH_quality+"</td></tr>");
+                        t.push("<tr><td>N</td><td>"+data.N+"<span class='unit'> %</span></td><td>"+data.N_quality+"</td></tr>");
+                        t.push("<tr><td>P</td><td>"+data.P+"<span class='unit'> ppm</span></td><td>"+data.P_quality+"</td></tr>");
+                        t.push("<tr><td>K</td><td>"+data.K+"<span class='unit'> m. eq./100g Soil</span></td><td>"+data.K_quality+"</td></tr>");
+                        t.push("<tr><td>Mg</td><td>"+data.Mg+"<span class='unit'> m. eq./100g Soil</span></td><td>"+data.Mg_quality+"</td></tr>");
+                        t.push("<tr><td>Ca</td><td>"+data.Ca+"<span class='unit'> m. eq./100g Soil</span></td><td>"+data.Ca_quality+"</td></tr>");
+                        t.push("<tr><td>Na</td><td>"+data.Na+"<span class='unit'> m. eq./100g Soil</span></td><td>"+data.Na_quality+"</td></tr>");
+                        t.push("<tr><td>B</td><td>"+data.B+"<span class='unit'> ppm</span></td><td>"+data.B_quality+"</td></tr>");
+                        t.push("<tr><td>CEC</td><td>"+data.CEC+"<span class='unit'> MH&AC</span></td><td>"+data.CEC_quality+"</td></tr>");
+                        t.push("<tr><td>OM</td><td>"+data.OM+"<span class='unit'> %</span></td><td>"+data.OM_quality+"</td></tr>");
+                        t.push("<tr><td>OC</td><td>"+data.OC+"<span class='unit'> %</span></td><td>"+data.OC_quality+"</td></tr>");
+                        t.push("<tr><td>P205</td><td>"+data.P205+"<span class='unit'> %</span></td></tr>");
+                        t.push("<tr><td>MF</td><td>"+data.MF+"</td></tr>");
+                        t.push("<tr><td>Class</td><td>"+data.Class+"</td></tr>");
                         t.push("</table>");
-                        t.push("<p style='width: 200px'>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>")
+                        t.push("<p style='width: 200px'>Note: Size of boreholes is exaggerated. Actual height is 50 cm with a 6-cm diameter.</p>");
                         app.popup.show(t.join(""));
                      }
                 }
